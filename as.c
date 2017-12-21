@@ -1,0 +1,101 @@
+#include<GL/glut.h>
+#include<GL/gl.h>
+#include<GL/glu.h>
+#include<stdio.h>
+#include<stdlib.h>
+void dis(int,int,int,int);
+void dis(int i,int p,int a,int b){
+printf("%d  %d  %d   %d\n",i,p,a,b);
+}
+int j,i=0,x,y,r,a,b,p,ta,tb;
+void draw(void){
+glClearColor(0,0,0,0);
+glClear (GL_COLOR_BUFFER_BIT);
+glLoadIdentity();
+glMatrixMode(GL_PROJECTION);
+gluOrtho2D(-200,500,-500,500);
+r=150;
+a=0,b=r;
+x=a,y=b;
+p=1-r;
+glBegin(GL_LINES);
+glVertex2f(a,b);
+while(a<b){
+if(p<0){
+ta=a;
+tb=b;
+a++;
+glVertex2f(a,b);
+glVertex2f(tb,ta);
+glVertex2f(b,a);
+glVertex2f(tb,-ta);
+glVertex2f(b,-a);
+glVertex2f(ta,-tb);
+glVertex2f(a,-b);
+glVertex2f(-ta,tb);
+glVertex2f(-a,b);
+glVertex2f(-tb,ta);
+glVertex2f(-b,a);
+glVertex2f(-tb,-ta);
+glVertex2f(-b,-a);
+glVertex2f(-ta,-tb);
+glVertex2f(-a,-b);
+glVertex2f(a,b);
+p=p+2*a+1;
+}
+else if(p>0){
+ta=a;
+tb=b;
+b--;
+a++;
+glVertex2f(a,b);
+glVertex2f(tb,ta);
+glVertex2f(b,a);
+glVertex2f(tb,-ta);
+glVertex2f(b,-a);
+glVertex2f(ta,-tb);
+glVertex2f(a,-b);
+glVertex2f(-ta,tb);
+glVertex2f(-a,b);
+glVertex2f(-tb,ta);
+glVertex2f(-b,a);
+glVertex2f(-tb,-ta);
+glVertex2f(-b,-a);
+glVertex2f(-ta,-tb);
+glVertex2f(-a,-b);
+glVertex2f(a,b);
+p=p+2*a+1-2*b;
+}
+i++;
+}
+glEnd();
+glBegin(GL_POLYGON);
+glVertex2f(0,150);glVertex2f(400,150);glVertex2f(200,75);
+glEnd();
+glBegin(GL_POLYGON);
+glVertex2f(200,75);glVertex2f(230,100);glVertex2f(440,-50);glVertex2f(400,-60);glVertex2f(440,-50);
+glEnd();
+glBegin(GL_POLYGON);
+glVertex2f(0,-150);glVertex2f(30,-180);glVertex2f(470,-80);glVertex2f(440,-50);
+glEnd();
+glBegin(GL_LINES);
+glVertex2f(400,150);glVertex2f(400,90);glVertex2f(400,90);glVertex2f(230,90);
+glVertex2f(240,96);glVertex2f(380,96);glVertex2f(380,98);glVertex2f(380,145);glVertex2f(380,145);glVertex2f(240,96);
+glVertex2f(360,100);glVertex2f(360,125);glVertex2f(360,125);glVertex2f(330,125);glVertex2f(330,125);glVertex2f(330,100);glVertex2f(330,100);glVertex2f(360,100);
+glVertex2f(470,-80);glVertex2f(470,-220);glVertex2f(470,-220);glVertex2f(30,-180);
+glVertex2f(100,-180);glVertex2f(450,-100);glVertex2f(450,-100);glVertex2f(450,-200);glVertex2f(450,-200);glVertex2f(100,-180);
+glVertex2f(430,-125);glVertex2f(430,-185);glVertex2f(430,-185);glVertex2f(390,-185);glVertex2f(390,-185);glVertex2f(390,-125);glVertex2f(390,-125);glVertex2f(430,-125);
+glColor3f(1,2,8);
+glEnd();
+glFlush();
+}
+int main(int argc,char **argv){
+glutInit(&argc,argv);
+glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+glutInitWindowPosition(40,100);
+glutInitWindowSize(700,1000);
+glutCreateWindow("as");
+glutDisplayFunc(draw);
+glutMainLoop();
+return 0;
+}
